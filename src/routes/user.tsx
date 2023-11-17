@@ -2,7 +2,7 @@ import { Await, defer, useLoaderData } from "react-router-dom";
 import type { LoaderFunctionArgs } from "react-router-dom";
 import api from "../lib/api";
 import { Suspense } from "react";
-import type { User } from "../types/";
+import type { Repo, User } from "../types/";
 import { UserProfile, UserProfileSkeleton } from "../components/UserProfile";
 import { ReposGrid } from "../components/ReposGrid";
 import { ReposGridSkeleton } from "../components/ReposGridSkeleton";
@@ -43,7 +43,7 @@ export default function User() {
             errorElement={<ErrorMessage message="Error loading repos" />}
           >
             <div className="h-screen pb-10">
-              <Pagination />
+              <Pagination page={1} total={5} />
               <ReposGrid />
             </div>
           </Await>
