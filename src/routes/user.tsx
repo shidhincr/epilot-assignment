@@ -7,6 +7,10 @@ import { UserProfile, UserProfileSkeleton } from "../components/UserProfile";
 import { ReposGrid } from "../components/ReposGrid";
 import { ReposGridSkeleton } from "../components/ReposGridSkeleton";
 import { Pagination } from "../components/Pagination";
+type UserLoaderData = {
+  userPromise: Promise<User>;
+  reposPromise: Promise<Repo[]>;
+};
 
 export async function loader({ params }: LoaderFunctionArgs) {
   // const userPromise = new Promise((resolve) => null);
@@ -21,7 +25,7 @@ const ErrorMessage = ({ message = "Error" }) => {
 };
 
 export default function User() {
-  const data = useLoaderData();
+  const data = useLoaderData() as UserLoaderData;
   return (
     <div className="bg-white p-5 rounded shadow-2xl flex w-full overflow-hidden">
       <div className="grid grid-cols-[200px_1fr] gap-10 items-start w-full">

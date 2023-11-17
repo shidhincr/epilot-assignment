@@ -1,14 +1,6 @@
 import { Link, useAsyncValue } from "react-router-dom";
 import { Line } from "./Line";
-
-type Repo = {
-  description: string;
-  html_url: string;
-  stargazers_count: string;
-  forks_count: string;
-  name: string;
-  id: string;
-};
+import type { Repo } from "../types";
 
 export const ReposGridSkeleton = () => {
   return (
