@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import api from "../lib/api";
 import { Suspense } from "react";
+import type { User } from "../types/";
 
 export async function loader({ params }) {
   // const userPromise = new Promise((resolve) => null);
@@ -21,9 +22,12 @@ const ErrorMessage = ({ message = "Error" }) => {
 };
 
 const UserProfile = () => {
-  const user = useAsyncValue();
+  const user = useAsyncValue() as User;
   return (
-    <div className="flex flex-col items-center flex-1 mt-10 px-5">
+    <div
+      className="flex flex-col items-center flex-1 mt-10 px-5"
+      data-testid="user-profile"
+    >
       <div>
         <img src={user?.avatar_url} className="w-40 rounded-full" />
       </div>
@@ -50,7 +54,10 @@ const UserProfile = () => {
 
 const UserProfileSkeleton = () => {
   return (
-    <div className="flex flex-col items-center max-h-fit animate-pulse mt-10 px-5">
+    <div
+      className="flex flex-col items-center max-h-fit animate-pulse mt-10 px-5"
+      data-testid="user-profile-skeleton"
+    >
       <div className="w-40 h-40 rounded-full bg-gray-200">&nbsp;</div>
       <div className="flex pt-10 flex-col gap-2">
         <div className="bg-gray-200 w-[200px] min-h-20">&nbsp;</div>
@@ -64,7 +71,10 @@ const UserProfileSkeleton = () => {
 
 const ReposSkeleton = () => {
   return (
-    <div className="grid grid-cols-3 animate-pulse gap-20 mt-10">
+    <div
+      className="grid grid-cols-3 animate-pulse gap-20 mt-10"
+      data-testid="repos-skeleton"
+    >
       {Array.from({ length: 11 }).map((_, index) => (
         <div className="flex gap-5 max-h-[100px]" key={index}>
           <div className="bg-gray-200 w-[100px]">&nbsp;</div>
@@ -87,7 +97,10 @@ const Repos = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-10 overflow-y-scroll flex-grow h-full ">
+    <div
+      className="grid grid-cols-3 gap-10 overflow-y-scroll flex-grow h-full "
+      data-testid="repos"
+    >
       {repos?.map((repo) => (
         <div
           className="flex gap-2 shadow-lg h-[150px] border rounded overflow-hidden"
@@ -148,7 +161,10 @@ const Repos = () => {
 
 const Pagination = () => {
   return (
-    <div className="flex gap-5 justify-end w-full pb-5">
+    <div
+      className="flex gap-5 justify-end w-full pb-5"
+      data-testid="pagination"
+    >
       <span className="w-8 h-8 rounded-full bg-pink-300 text-sm flex items-center justify-center">
         1
       </span>

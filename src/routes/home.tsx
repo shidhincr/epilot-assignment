@@ -6,14 +6,8 @@ import {
   useLoaderData,
   useNavigate,
   useNavigation,
-  useSubmit,
 } from "react-router-dom";
-
-type User = {
-  id: number;
-  login: string;
-  avatar_url: string;
-};
+import type { User } from "../types/";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
