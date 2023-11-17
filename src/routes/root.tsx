@@ -36,7 +36,7 @@ export default function Root() {
           Github Search
         </h1>
       </header>
-      <section className="flex justify-center p-10 max-h-[calc(100vh-10%)]">
+      <section className="flex justify-center p-10 max-h-[calc(100vh-5%)]">
         <Outlet />
       </section>
     </main>

@@ -87,7 +87,7 @@ const Repos = () => {
   }
 
   return (
-    <div class="grid grid-cols-3 gap-10 overflow-y-scroll flex-grow h-full">
+    <div class="grid grid-cols-3 gap-10 overflow-y-scroll flex-grow h-full ">
       {repos?.map((repo) => (
         <div
           className="flex gap-2 shadow-lg h-[150px] border rounded overflow-hidden"
@@ -146,6 +146,31 @@ const Repos = () => {
   );
 };
 
+const Pagination = () => {
+  return (
+    <div className="flex gap-5 justify-end w-full pb-5">
+      <span className="w-8 h-8 rounded-full bg-pink-300 text-sm flex items-center justify-center">
+        1
+      </span>
+      <span className="w-8 h-8 rounded-full bg-pink-300 text-sm flex items-center justify-center">
+        1
+      </span>
+      <span className="w-8 h-8 rounded-full bg-pink-300 text-sm flex items-center justify-center">
+        1
+      </span>
+      <span className="w-8 h-8 rounded-full bg-pink-300 text-sm flex items-center justify-center">
+        1
+      </span>
+      <span className="w-8 h-8 rounded-full bg-pink-300 text-sm flex items-center justify-center">
+        1
+      </span>
+      <span className="w-8 h-8 rounded-full bg-pink-300 text-sm flex items-center justify-center">
+        1
+      </span>
+    </div>
+  );
+};
+
 export default function User() {
   const data = useLoaderData();
   return (
@@ -164,7 +189,10 @@ export default function User() {
             resolve={data.reposPromise}
             errorElement={<ErrorMessage message="Error loading repos" />}
           >
-            <Repos />
+            <div className="h-screen pb-10">
+              <Pagination />
+              <Repos />
+            </div>
           </Await>
         </Suspense>
       </div>

@@ -1,9 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "../lib/api";
-import { Form, Link, useLoaderData, useNavigation } from "react-router-dom";
+import {
+  Form,
+  Link,
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+  useSubmit,
+} from "react-router-dom";
 
 type User = {
   id: number;
+  login: string;
+  avatar_url: string;
 };
 
 export async function loader({ request }) {
@@ -18,11 +27,22 @@ export default function Home() {
   const [disabled, setDisabled] = useState(false);
   const [query, setQuery] = useState(urlQuery || "");
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const isLoading = navigation.state === "loading";
+  const searchBoxRef = useRef<HTMLInputElement>(null);
 
   const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
+
+  const clearQuery = () => {
+    setQuery("");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    searchBoxRef?.current?.focus();
+  }, [urlQuery]);
 
   useEffect(() => {
     if (query.length === 0 || isLoading) {
@@ -38,32 +58,42 @@ export default function Home() {
         <Form className="flex gap-5 justify-between">
           <input
             type="text"
+            ref={searchBoxRef}
             data-testid="search-box"
             onChange={handleOnchange}
-            defaultValue={query}
+            value={query}
             name="query"
             placeholder="Search for Github users"
             className="flex-1 outline-none p-2 rounded"
-            autoFocus
           />
-          <button
-            type="submit"
-            data-testid="search-button"
-            disabled={disabled}
-            className="bg-blue-500 text-sky-50 text-sm min-w-[100px] rounded"
-          >
-            {isLoading ? (
-              <span data-testid="loading-spinner">loading...</span>
-            ) : (
-              "Search"
+          <div className="flex gap-4">
+            {query.length > 0 && (
+              <span
+                onClick={clearQuery}
+                className="flex flex-grow items-center text-slate-500 cursor-pointer"
+              >
+                &times;
+              </span>
             )}
-          </button>
+            <button
+              type="submit"
+              data-testid="search-button"
+              disabled={disabled}
+              className="bg-blue-500 text-sky-50 text-sm min-w-[100px] rounded"
+            >
+              {isLoading ? (
+                <span data-testid="loading-spinner">loading...</span>
+              ) : (
+                "Search"
+              )}
+            </button>
+          </div>
         </Form>
       </div>
-      {!isLoading && users?.items?.length > 0 && (
+      {!isLoading && query === urlQuery && users?.items?.length > 0 && (
         <div className="bg-slate-200 mt-2 p-3 max-h-96 overflow-y-scroll rounded shadow-2xl">
           <ul data-testid="search-results">
-            {users?.items?.map((user) => (
+            {users?.items?.map((user: User) => (
               <li
                 key={user.id}
                 data-testid="user-card"
