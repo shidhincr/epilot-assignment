@@ -1,4 +1,4 @@
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useNavigation } from "react-router-dom";
 import type { LoaderFunctionArgs } from "react-router-dom";
 import api from "../lib/api";
 import { Suspense } from "react";
@@ -10,14 +10,21 @@ import { Pagination } from "../components/Pagination";
 type UserLoaderData = {
   userPromise: Promise<User>;
   reposPromise: Promise<Repo[]>;
+  page?: string;
 };
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params, request }: LoaderFunctionArgs) {
   // const userPromise = new Promise((resolve) => null);
   // const reposPromise = new Promise((resolve) => null);
+  const url = new URL(request.url);
+  const page = url.searchParams.get("page") ?? "";
+
   const userPromise = api.getUserDetails({ username: params.username });
-  const reposPromise = api.getRepositories({ username: params.username });
-  return defer({ userPromise, reposPromise });
+  const reposPromise = api.getRepositories({
+    username: params.username,
+    page,
+  });
+  return defer({ userPromise, reposPromise, page });
 }
 
 const ErrorMessage = ({ message = "Error" }) => {
@@ -26,6 +33,9 @@ const ErrorMessage = ({ message = "Error" }) => {
 
 export default function User() {
   const data = useLoaderData() as UserLoaderData;
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
+
   return (
     <div className="bg-white p-5 rounded shadow-2xl flex w-full overflow-hidden">
       <div className="grid grid-cols-[200px_1fr] gap-10 items-start w-full">
@@ -43,8 +53,10 @@ export default function User() {
             errorElement={<ErrorMessage message="Error loading repos" />}
           >
             <div className="h-screen pb-10">
-              <Pagination page={1} total={5} />
-              <ReposGrid />
+              <Await resolve={data.userPromise}>
+                <Pagination page={Number(data.page || 1)} total={5} />
+              </Await>
+              {isLoading ? <ReposGridSkeleton /> : <ReposGrid />}
             </div>
           </Await>
         </Suspense>

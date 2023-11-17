@@ -14,14 +14,20 @@ const api = ky.create({
   },
 });
 
-const getUsers = async ({ query }) => {
+const getUsers = async ({ query }: { query: string }) => {
   return await api.get(`search/users?q=${query}`).json();
 };
-const getUserDetails = async ({ username }) => {
+const getUserDetails = async ({ username }: { username?: string }) => {
   return await api.get(`users/${username}`).json();
 };
-const getRepositories = async ({ username }) => {
-  return await api.get(`users/${username}/repos`).json();
+const getRepositories = async ({
+  username,
+  page = "1",
+}: {
+  username?: string;
+  page?: string;
+}) => {
+  return await api.get(`users/${username}/repos?page=${page}`).json();
 };
 
 export default {
