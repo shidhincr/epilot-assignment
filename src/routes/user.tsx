@@ -65,7 +65,7 @@ const UserProfileSkeleton = () => {
 const ReposSkeleton = () => {
   return (
     <div class="grid grid-cols-3 animate-pulse gap-20">
-      {Array.from({ length: 8 }).map((_, index) => (
+      {Array.from({ length: 11 }).map((_, index) => (
         <div className="flex gap-5 max-h-[100px]" key={index}>
           <div className="bg-gray-200 w-[100px]">&nbsp;</div>
           <div className="space-y-4">
@@ -149,7 +149,7 @@ const Repos = () => {
 export default function User() {
   const data = useLoaderData();
   return (
-    <div className="bg-white container mx-auto p-10 mb-10 h-[600px] rounded shadow-2xl flex">
+    <div className="bg-white p-10 rounded shadow-2xl flex w-full overflow-hidden">
       <div className="grid grid-cols-[200px_1fr] gap-10 items-start w-full">
         <Suspense fallback={<UserProfileSkeleton />}>
           <Await

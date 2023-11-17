@@ -44,6 +44,7 @@ export default function Home() {
             name="query"
             placeholder="Search for Github users"
             className="flex-1 outline-none p-2 rounded"
+            autoFocus
           />
           <button
             type="submit"
@@ -60,7 +61,7 @@ export default function Home() {
         </Form>
       </div>
       {!isLoading && users?.items?.length > 0 && (
-        <div className="bg-white mt-2 p-3 max-h-96 overflow-y-scroll rounded shadow-2xl">
+        <div className="bg-slate-200 mt-2 p-3 max-h-96 overflow-y-scroll rounded shadow-2xl">
           <ul data-testid="search-results">
             {users?.items?.map((user) => (
               <li
@@ -80,6 +81,11 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </div>
+      )}
+      {!isLoading && urlQuery && users?.items?.length === 0 && (
+        <div className="bg-slate-200 mt-2 p-3 max-h-96 overflow-y-scroll rounded shadow-2xl text-center text-sm text-slate-600">
+          No results
         </div>
       )}
     </div>
