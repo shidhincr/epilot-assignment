@@ -1,4 +1,4 @@
-import { Link, useAsyncValue } from "react-router-dom";
+import { useAsyncValue } from "react-router-dom";
 import { User } from "../types";
 import { useEffect, useState } from "react";
 
