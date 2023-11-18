@@ -31,7 +31,7 @@ export const ReposGrid = () => {
 
   return (
     <div
-      className="grid grid-cols-3 gap-10 overflow-y-scroll flex-grow h-full "
+      className="grid grid-cols-3 gap-5 overflow-y-scroll h-[calc(100vh-15%)]"
       data-testid="repos"
     >
       {repos?.map((repo) => (

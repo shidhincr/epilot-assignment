@@ -1,4 +1,10 @@
-import { Await, defer, useLoaderData, useNavigation } from "react-router-dom";
+import {
+  Await,
+  defer,
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import type { LoaderFunctionArgs } from "react-router-dom";
 import api from "../lib/api";
 import { Suspense } from "react";
@@ -34,7 +40,12 @@ const ErrorMessage = ({ message = "Error" }) => {
 export default function User() {
   const data = useLoaderData() as UserLoaderData;
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const isLoading = navigation.state === "loading";
+
+  const handlePageChange = (page: number) => {
+    navigate(`?page=${page}`, { replace: true });
+  };
 
   return (
     <div className="bg-white p-5 rounded shadow-2xl flex w-full overflow-hidden">
@@ -52,9 +63,12 @@ export default function User() {
             resolve={data.reposPromise}
             errorElement={<ErrorMessage message="Error loading repos" />}
           >
-            <div className="h-screen pb-10">
+            <div className="h-full ">
               <Await resolve={data.userPromise}>
-                <Pagination page={Number(data.page || 1)} total={5} />
+                <Pagination
+                  page={Number(data.page || 1)}
+                  onPageChange={handlePageChange}
+                />
               </Await>
               {isLoading ? <ReposGridSkeleton /> : <ReposGrid />}
             </div>
