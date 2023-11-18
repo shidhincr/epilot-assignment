@@ -58,10 +58,10 @@ export const UserProfileSkeleton = () => {
     >
       <div className="w-40 h-40 rounded-full bg-gray-200">&nbsp;</div>
       <div className="flex pt-10 flex-col gap-2">
-        <Line width="200px" height="20" />
-        <Line width="100px" height="20" />
-        <Line width="200px" height="20" />
-        <Line width="150px" height="20" />
+        <Line width={100} height={20} />
+        <Line width={100} height={20} />
+        <Line width={100} height={20} />
+        <Line width={100} height={20} />
       </div>
     </UserProfileContainer>
   );

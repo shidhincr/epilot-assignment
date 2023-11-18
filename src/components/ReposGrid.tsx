@@ -11,11 +11,11 @@ export const ReposGridSkeleton = () => {
       {Array.from({ length: 11 }).map((_, index) => (
         <div className="flex gap-5 max-h-[100px]" key={index}>
           <div className="bg-gray-200 w-[100px]">&nbsp;</div>
-          <div className="space-y-4">
-            <Line width="200px" height="3" />
-            <Line width="100px" height="3" />
-            <Line width="200px" height="3" />
-            <Line width="150px" height="3" />
+          <div className="space-y-4 flex-grow">
+            <Line width={200} height={3} />
+            <Line width={100} height={3} />
+            <Line width={200} height={3} />
+            <Line width={100} height={3} />
           </div>
         </div>
       ))}

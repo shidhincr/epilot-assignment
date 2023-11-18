@@ -10,8 +10,7 @@ import api from "../lib/api";
 import { Suspense } from "react";
 import type { Repo, User } from "../types/";
 import { UserProfile, UserProfileSkeleton } from "../components/UserProfile";
-import { ReposGrid } from "../components/ReposGrid";
-import { ReposGridSkeleton } from "../components/ReposGridSkeleton";
+import { ReposGrid, ReposGridSkeleton } from "../components/ReposGrid";
 import { Pagination } from "../components/Pagination";
 type UserLoaderData = {
   userPromise: Promise<User>;

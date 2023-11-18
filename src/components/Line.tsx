@@ -1,8 +1,8 @@
 type LineProps = {
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 };
 
 export const Line = ({ width, height }: LineProps) => {
-  return <div className={`bg-gray-200 w-[${width}] h-${height}`}>&nbsp;</div>;
+  return <div className={`bg-gray-200 w-[${width}px] h-${height}`}>&nbsp;</div>;
 };
