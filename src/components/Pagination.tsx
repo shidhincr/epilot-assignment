@@ -31,9 +31,8 @@ export const Pagination = ({ page = 1, onPageChange }: PaginationProps) => {
       {Array.from({ length: totalPages }).map((_, idx) => (
         <button
           onClick={() => changePage(idx + 1)}
-          className={`w-8 h-8 text-sm flex items-center justify-center ${
-            currentPage === idx + 1 ? activeClass : ""
-          } `}
+          className={`w-8 h-8 text-sm flex items-center justify-center ${currentPage === idx + 1 ? activeClass : ""
+            } `}
           key={idx}
         >
           {idx + 1}

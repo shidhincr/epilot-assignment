@@ -22,7 +22,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   // const userPromise = new Promise((resolve) => null);
   // const reposPromise = new Promise((resolve) => null);
   const url = new URL(request.url);
-  const page = url.searchParams.get("page") ?? "";
+  const page = url.searchParams.get("page") ?? "1";
 
   const userPromise = api.getUserDetails({ username: params.username });
   const reposPromise = api.getRepositories({
@@ -69,7 +69,8 @@ export function User() {
                   onPageChange={handlePageChange}
                 />
               </Await>
-              {isLoading ? <ReposGridSkeleton /> : <ReposGrid />}
+              <ReposGrid />
+              {/* {isLoading ? <ReposGridSkeleton /> : <ReposGrid />} */}
             </div>
           </Await>
         </Suspense>

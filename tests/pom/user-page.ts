@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
-const BASE_URL = "localhost:5173/user/shidhincr";
+const BASE_URL = "localhost:5173/user/";
 
 export class UserPage {
   userProfileSkeleton: Locator;
@@ -8,17 +8,20 @@ export class UserPage {
   userProfile: Locator;
   repos: Locator;
   pagination: Locator;
+  promises: Record<string, Promise<any>>;
 
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
-  async load() {
-    const userDataPromise = this.page.waitForResponse((response) =>
-      response.url().includes(`/users/`),
+  async load({ username }) {
+    const userDataPromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes(`/users/`) && response.status() === 200,
     );
-    // const repoListPromise = this.page.waitForResponse((response) =>
-    //   response.url().includes(`/repos`),
-    // );
-    await this.page.goto(BASE_URL);
+    const repoListPromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes(`/repos`) && response.status() == 200,
+    );
+    await this.page.goto(BASE_URL + username);
     this.userProfileSkeleton = await this.page.getByTestId(
       "user-profile-skeleton",
     );
@@ -27,12 +30,20 @@ export class UserPage {
     this.repos = await this.page.getByTestId("repos");
     this.pagination = await this.page.getByTestId("pagination");
 
-    return { userDataPromise };
+    this.promises = { userDataPromise, repoListPromise };
+  }
+
+  async resolvePromises() {
+    if (this.promises) {
+      await Promise.all(Object.values(this.promises));
+      await this.page.waitForTimeout(5000);
+    }
   }
   async selectRepo(index: number) {
     // click on the desired page number
   }
-  async changePage(page: string) {
+  async changePage(page: number) {
     // click on the desired page number
+    await this.pagination.locator("button").nth(page).click();
   }
 }

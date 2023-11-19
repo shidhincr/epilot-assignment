@@ -11,19 +11,26 @@ test.describe("UserPage", () => {
   test("loading skeletons and data", async ({ page }) => {
     // expect the skeletons to be visible
     // after the data is loaded, show the user profile and repos
-    const { userDataPromise } = await userPage.load();
+    await userPage.load({
+      username: "shidhincr",
+    });
     expect(userPage.userProfileSkeleton).toBeVisible();
     expect(userPage.reposSkeleton).toBeVisible();
-    await userDataPromise;
+    await userPage.resolvePromises();
     expect(userPage.userProfileSkeleton).not.toBeVisible();
+    expect(userPage.reposSkeleton).not.toBeVisible();
   });
 
   test("pagination", async ({ page }) => {
     // pagination
-  });
-
-  test("the navigation", async ({ page }) => {
-    // click on the user profile and see if it opens a new tab
-    // click on a repo link and see if it opens a new tab
+    await userPage.load({ username: "shidhincr" });
+    await userPage.resolvePromises();
+    expect(userPage.pagination).toBeVisible();
+    await userPage.changePage(2);
+    await page.waitForTimeout(5000);
+    expect(userPage.pagination.locator("button").nth(2)).toHaveClass(
+      /text-pink-600/,
+    );
+    expect(page.url()).toContain("/user/shidhincr?page=3");
   });
 });

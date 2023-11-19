@@ -7,7 +7,7 @@ type SearchFormProps = {
 };
 
 export const SearchForm = ({ initialQuery, isLoading }: SearchFormProps) => {
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [query, setQuery] = useState(initialQuery || "");
   const navigate = useNavigate();
   const searchBoxRef = useRef<HTMLInputElement>(null);
