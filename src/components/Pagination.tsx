@@ -27,10 +27,7 @@ export const Pagination = ({ page = 1, onPageChange }: PaginationProps) => {
   }, [currentPage]);
 
   return (
-    <div
-      className="flex gap-5 justify-end w-full pb-5 sticky"
-      data-testid="pagination"
-    >
+    <div className="flex gap-5 pb-5" data-testid="pagination">
       {Array.from({ length: totalPages }).map((_, idx) => (
         <button
           onClick={() => changePage(idx + 1)}

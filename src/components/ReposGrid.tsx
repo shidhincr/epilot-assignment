@@ -26,12 +26,16 @@ export const ReposGridSkeleton = () => {
 export const ReposGrid = () => {
   const repos = useAsyncValue() as Repo[];
   if (repos.length === 0) {
-    return <div>No repos</div>;
+    return (
+      <div className="flex flex-grow justify-center items-center h-full text-lg text-slate-400">
+        No repos available
+      </div>
+    );
   }
 
   return (
     <div
-      className="grid grid-cols-3 gap-5 overflow-y-scroll h-[calc(100vh-15%)]"
+      className="grid grid-cols-3 gap-5 overflow-y-scroll h-[90%]"
       data-testid="repos"
     >
       {repos?.map((repo) => (

@@ -62,7 +62,7 @@ export default function User() {
             resolve={data.reposPromise}
             errorElement={<ErrorMessage message="Error loading repos" />}
           >
-            <div className="h-full ">
+            <div className="h-full w-full overflow-hidden overflow-x-scroll">
               <Await resolve={data.userPromise}>
                 <Pagination
                   page={Number(data.page || 1)}

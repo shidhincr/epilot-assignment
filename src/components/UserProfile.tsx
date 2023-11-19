@@ -6,7 +6,7 @@ import { Line } from "./Line";
 const UserProfileContainer = ({
   testId,
   children,
-  className,
+  className = "",
 }: {
   testId: string;
   children: ReactNode;
