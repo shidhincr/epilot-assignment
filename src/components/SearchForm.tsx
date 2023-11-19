@@ -34,7 +34,7 @@ export const SearchForm = ({ initialQuery, isLoading }: SearchFormProps) => {
   }, [initialQuery]);
 
   return (
-    <Form className="flex gap-5 justify-between">
+    <Form className="flex">
       <input
         type="text"
         ref={searchBoxRef}
@@ -43,13 +43,13 @@ export const SearchForm = ({ initialQuery, isLoading }: SearchFormProps) => {
         value={query}
         name="query"
         placeholder="Search for Github users"
-        className="flex-1 outline-none p-2 rounded"
+        className="outline-none p-2 rounded"
       />
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-end flex-grow">
         {query.length > 0 && (
           <span
             onClick={clearQuery}
-            className="flex flex-grow items-center text-slate-500 cursor-pointer"
+            className="flex items-center text-slate-500 cursor-pointer"
           >
             &times;
           </span>
@@ -58,7 +58,7 @@ export const SearchForm = ({ initialQuery, isLoading }: SearchFormProps) => {
           type="submit"
           data-testid="search-button"
           disabled={disabled}
-          className="bg-blue-500 text-sky-50 text-sm min-w-[100px] rounded"
+          className="bg-blue-500 text-sky-50 text-sm max-w-[100px] flex-1 rounded"
         >
           {isLoading ? (
             <span data-testid="loading-spinner">loading...</span>
