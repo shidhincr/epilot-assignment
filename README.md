@@ -1,27 +1,41 @@
-# React + TypeScript + Vite
+# Github Search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Simple Github Search App
 
-Currently, two official plugins are available:
+[Live Demo](https://epilot-assignment.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
 
-## Expanding the ESLint configuration
+- Vite + React + Typescript
+- React Router@6
+- TailwindCSS
+- Playwright for e2e testing
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## How to run locally
 
-- Configure the top-level `parserOptions` property like this:
+Install dependencies
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```sh
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+_Development_
+
+```sh
+npm run dev
+```
+
+_Production build_
+
+```sh
+npm run build
+npm run preview
+```
+
+## e2e Testing
+
+Used playwright with UI mode for running the e2e tests.
+
+```sh
+npm run test:e2e
+```
