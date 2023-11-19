@@ -27,7 +27,7 @@ const Nav = () => {
 
 export default function Root() {
   return (
-    <main className="w-full h-screen bg-gradient-to-r from-sky-500 to-indigo-500">
+    <main className="w-full sm:h-full min-h-screen md:h-screen bg-gradient-to-r from-sky-500 to-indigo-500">
       <header className="shadow-xl p-4 text-center bg-white flex">
         <div className="flex-shrink-0">
           <Nav />

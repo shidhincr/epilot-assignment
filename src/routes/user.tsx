@@ -47,8 +47,8 @@ export function User() {
   };
 
   return (
-    <div className="bg-white p-5 rounded shadow-2xl flex w-full overflow-hidden">
-      <div className="grid grid-cols-[200px_1fr] gap-10 items-start w-full">
+    <div className="bg-white p-5 rounded shadow-2xl flex w-full md:overflow-hidden">
+      <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start w-full">
         <Suspense fallback={<UserProfileSkeleton />}>
           <Await
             resolve={data.userPromise}
@@ -62,7 +62,7 @@ export function User() {
             resolve={data.reposPromise}
             errorElement={<ErrorMessage message="Error loading repos" />}
           >
-            <div className="h-full w-full overflow-hidden overflow-x-scroll">
+            <div className="h-full w-full overflow-hidden md:overflow-x-scroll">
               <Await resolve={data.userPromise}>
                 <Pagination
                   page={Number(data.page || 1)}

@@ -27,7 +27,7 @@ export const Pagination = ({ page = 1, onPageChange }: PaginationProps) => {
   }, [currentPage]);
 
   return (
-    <div className="flex gap-5 pb-5" data-testid="pagination">
+    <div className="flex gap-5 pb-5 overflow-x-scroll" data-testid="pagination">
       {Array.from({ length: totalPages }).map((_, idx) => (
         <button
           onClick={() => changePage(idx + 1)}

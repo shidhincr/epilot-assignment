@@ -5,7 +5,7 @@ import type { Repo } from "../types";
 export const ReposGridSkeleton = () => {
   return (
     <div
-      className="grid grid-cols-3 animate-pulse gap-20 mt-10"
+      className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 animate-pulse gap-20 mt-10"
       data-testid="repos-skeleton"
     >
       {Array.from({ length: 11 }).map((_, index) => (
@@ -35,7 +35,7 @@ export const ReposGrid = () => {
 
   return (
     <div
-      className="grid grid-cols-3 gap-5 overflow-y-scroll h-[90%]"
+      className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 overflow-y-scroll md:h-[90%]"
       data-testid="repos"
     >
       {repos?.map((repo) => (
