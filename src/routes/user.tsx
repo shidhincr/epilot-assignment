@@ -36,7 +36,7 @@ const ErrorMessage = ({ message = "Error" }) => {
   return <p className="text-red-600 flex justify-center">{message}</p>;
 };
 
-export default function User() {
+export function User() {
   const data = useLoaderData() as UserLoaderData;
   const navigation = useNavigation();
   const navigate = useNavigate();

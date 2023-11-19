@@ -17,7 +17,7 @@ type HomeLoaderData = {
   query?: string;
 };
 
-export default function Home() {
+export function Home() {
   const { users, query: urlQuery } = useLoaderData() as HomeLoaderData;
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
