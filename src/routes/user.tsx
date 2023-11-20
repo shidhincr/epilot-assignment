@@ -69,8 +69,7 @@ export function User() {
                   onPageChange={handlePageChange}
                 />
               </Await>
-              <ReposGrid />
-              {/* {isLoading ? <ReposGridSkeleton /> : <ReposGrid />} */}
+              {isLoading ? <ReposGridSkeleton /> : <ReposGrid />}
             </div>
           </Await>
         </Suspense>
